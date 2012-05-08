@@ -2,10 +2,13 @@
 % Felix Leipold
 % May 2012
 
-Introduction
-============
+Description
+===========
 
-xtpl is a templating mechnism in the spirit of unix.  It was developed to help with document preparation, but could also be used in other circumstances, where text needs to be enriched with output from other utilities.
+xtpl is a templating mechnism in the spirit of unix.
+It was developed to help with document preparation,
+but could also be used in other circumstances,
+where text needs to be enriched with output from other utilities.
 
 xtpl takes a template text and substitutes special expressions with
 the output from external tools. It also allows to filter parts
@@ -16,7 +19,7 @@ Including output from a utility
 
 The most basic usecase for xtpl is to simply include the output from a
 utility into the document.
-Consider the following example document:
+Consider the following example document (`readme.txt.xtpl`):
 
 ~~~~~ {.tpl}
 The basic structure of the project looks like this:
