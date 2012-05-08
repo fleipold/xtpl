@@ -1,0 +1,87 @@
+#!/usr/bin/env ruby
+#
+
+class Parser
+
+    def filter(command, string)
+        output=""
+        IO.popen(command, "w+") do |io|
+           io.puts(string);#"Hello\nWorld\nA")
+           io.close_write
+           output=io.read
+        end
+        return output
+    end
+
+
+    def parseFile()
+        @lines = readlines().reverse()
+
+        while (!(@lines.empty?)) do
+            line = @lines.pop
+            parseLine(line)
+        end
+    end
+
+    def parseLine(line)
+        if (/<<<</.match(line)) then
+            print line.split(/<<<</)[0]
+            parseInlineDocument();
+        else
+            puts line
+        end
+    end
+
+   def parseInlineDocument()
+       command = @lines.pop
+       if (/>>>/.match(command))
+           parseInlineDocumentToFile(command)
+       else
+            parseInlineDocumentHere(command)
+       end
+   end
+
+   def parseInlineDocumentHere(command)
+       input = ""
+
+
+       while (!(@lines.empty?)) do
+
+            line = @lines.pop
+            if (/>>>>/.match(line)) then
+                print filter(command, input)
+                @lines.push(line.split(/>>>>/)[1])
+                return
+            end
+            input += line
+       end
+       # ERROR MISSING '>>>>'
+   end
+
+   def parseInlineDocumentToFile(cmd)
+       input = ""
+       command = cmd.split(/>>>/)[0]
+       filename = cmd.split(/>>>/)[1].strip
+
+
+       while (!(@lines.empty?)) do
+
+            line = @lines.pop
+            if (/>>>>/.match(line)) then
+                File.open(filename, "w+") { |f| f << filter(command, input)}
+                print(filename)
+                @lines.push(line.split(/>>>>/)[1])
+                return
+            end
+            input += line
+       end
+       # ERROR MISSING '>>>>'
+   end
+
+
+end
+
+Parser.new.parseFile()
+
+
+
