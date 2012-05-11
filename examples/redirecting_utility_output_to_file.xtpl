@@ -1,0 +1,9 @@
+An example graph rendered using dot:
+
+<img href="<<<<
+dot -Tpng >>> graph.png
+digraph g{
+    a -> b
+    c -> b
+}
+>>>>">
