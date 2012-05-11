@@ -38,7 +38,7 @@ we will get the following output:
 
 ~~~~ {.tpl}
 <<<<
-./xtpl < examples/output_from_utility.xtpl
+xtpl < examples/output_from_utility.xtpl
 >>>>
 
 ~~~~
@@ -60,7 +60,7 @@ Piping this through xtpl will yield:
 
 ~~~~~ {.tpl}
 <<<<
-./xtpl < examples/filtering.xtpl
+xtpl < examples/filtering.xtpl
 >>>>
 
 ~~~~~
@@ -81,7 +81,7 @@ Now this yields the following output:
 
 ~~~~~~ {.html}
 <<<<
-./xtpl < examples/redirecting_utility_output_to_file.xtpl
+xtpl < examples/redirecting_utility_output_to_file.xtpl
 >>>>
 
 ~~~~~~
